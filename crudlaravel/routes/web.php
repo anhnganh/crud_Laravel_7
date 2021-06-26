@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +21,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/admin','AdminController@index')
+->middleware(['auth','role:admin']);
+
 Route::resource('sharks','sharkController');
 
+Route::resource('users','UserController');
+
+Route::resource('shops','ShopController');
+
+Route::get('/shops/{id}/users',[ShopController::class,'show'])->middleware(['auth']);
+
+Route::get('/users/{id}/shops', [UserController::class,'show'])->middleware(['auth']);
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/add-Shop',[UserController::class,'create'])->name('shops.add');
+
+Route::get('/save-shops',[UserController::class,'store'])->name('shops.save');
