@@ -74,8 +74,8 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $ModelsShops= User::find($id);
-        return view('Shops.edit',compact('ModelsShops'));
+        $shop= User::find($id);
+        return view('Shops.edit',compact('shop'));
     }
 
     /**
