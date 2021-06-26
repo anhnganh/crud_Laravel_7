@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\ModelsShops;
 use App\User;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\QueryException;
 class UserController extends Controller
 {
     /**
@@ -24,12 +24,12 @@ class UserController extends Controller
      */
     public function create(){
         //
-
-       $user = User::all();
-      return view('Shops.create', compact('user'));
-      
+    //   $user = ModelsShops::find($id);   
+    //   return view('Shops.create', compact('user'));
+  
     }
     
+   
 
     /**
      * Store a newly created resource in storage.
@@ -62,7 +62,7 @@ class UserController extends Controller
     {
         //
         $ModelsShops= User::find($id)->shops;
-        return view('Shops.index',['ModelsShops'=>$ModelsShops])->with('ModelsShops',$ModelsShops);
+        return view('Shops.index',compact('ModelsShops'))->with('ModelsShops',$ModelsShops);
     }
 
     /**
@@ -74,7 +74,7 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $shop= User::find($id);
+        $shop= ModelsShops::find($id);
         return view('Shops.edit',compact('shop'));
     }
 
@@ -85,19 +85,22 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ModelsShops $modelsShops)
+    public function update(Request $request,  $id)
     {
         //
-        $request->validate([
-            'name'=>'required',
-            'description'=>'required',
-            'image'=>'required',
-            'user_id' => auth()->id()
-        ]);
-        
-        $modelsShops->update($request->all());
+        $shop= ModelsShops::find($id);
+        // $request->validate([
+        //     'name'=>'required',
+        //     'description'=>'required',
+        //     'image'=>'required',
+        //    'user_id' => auth()->id()
+        // ]);
+        $shop->name = $request->name;
+        $shop->description=$request->description;
+        $shop->image=$request->image;
+        $shop->save();
         return redirect()->route('users.show')->with('sucess','update sucess');
-
+       // return "abc";
     }
 
     /**

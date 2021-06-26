@@ -2,17 +2,20 @@
 @extends('layouts.app')
 <div class="container">
 <h1>All the Shops</h1>
-@foreach($ModelsShops as $ModelsShops=>$value)
+
+
+
 <nav class="navbar navbar-inverse">
     <div class="navbar-header">
     </div>
     <ul class="nav navbar-nav">
-        <li><a href="{{ route('shops.add',$value->user_id) }}">Create a Shops</a>
+        <li><a href="">Create a Shops</a>
     </ul>
     @if (Session::has('message'))
     <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
 </nav>
+@foreach($ModelsShops as $ModelsShops=>$value)
 <table class="table table-striped table-bordered"> 
     <thread><table class="table table-striped table-bordered"> 
     <thread>
