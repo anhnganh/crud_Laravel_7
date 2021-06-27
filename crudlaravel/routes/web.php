@@ -36,6 +36,6 @@ Route::get('/users/{id}/shops', [UserController::class,'show'])->middleware(['au
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/addShop/{$id}',[AddShopController::class,'addShops'])->name('shops.add');
+Route::get('/addShop/{id}',[UserController::class,'create'])->name('shops.add');
 
-Route::get('/save-shops',[UserController::class,'store'])->name('shops.save');
+Route::get('/save-shops/{$id}',[UserController::class,'store'])->name('shops.save');

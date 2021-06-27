@@ -2,11 +2,10 @@
 <div class="container">
 <h1>Create a Shops</h1>
   
-    @foreach($user as $user=>$value)
-        {{$value->id}}
-    @endforeach
-<form method="post" action="{{ route('shops.save') }}">
+  
+<form method="post" action="{{ route('shops.add', $user) }}">
     @csrf
+    @method('GET')
     <div class="form-group">
         <label for="name">Name: </label>
         <input type="text" name="name" class="form-control">

@@ -22,11 +22,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function create($id){
         //
-    //   $user = ModelsShops::find($id);   
-    //   return view('Shops.create', compact('user'));
-  
+        $user=$id;
+        return view('Shops.create',compact('user'));
     }
     
    
@@ -62,7 +61,9 @@ class UserController extends Controller
     {
         //
         $ModelsShops= User::find($id)->shops;
-        return view('Shops.index',compact('ModelsShops'))->with('ModelsShops',$ModelsShops);
+      //  return $ModelsShops;
+         $user_id=$id;
+         return view('Shops.index',compact('ModelsShops','id'))->with('ModelsShops',$ModelsShops);
     }
 
     /**
